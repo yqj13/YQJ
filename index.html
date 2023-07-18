@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .star{
+           margin-left: 29px;
+           width: 99px;
+           text-align: center;
+           height: 29px;
+           line-height: 29px;
+           border-radius: 29px;
+           border: 1px solid aquamarine;
+        }
+    </style>
+</head>
+<body>
+    <!-- 第${i}次 -->
+    <div style="position: absolute; top: 50%; left: 50%;  ">
+    <p style="font-size: larger; font-weight: 600;">开始抽奖！</p>
+    <button class="star">点击开始</button>
+    </div>
+    
+    
+    <script>
+        const p = document.querySelector("div p")
+        const btn = document.querySelector(".star")
+        let award = ["亲亲 X10" ,"梳头 X3" ,"送礼物" ,"抱抱十分钟" ,"陪伴3小时" ,"免打扰一天"]
+        let i = 1
+        function getAward(){
+           p.innerHTML = `第${i}次抽奖结果为：${award[Math.floor(Math.random()*award.length)]}`
+           i++
+          
+           let t = 10
+          let choice = setInterval(function(){
+            p.innerHTML = `单次抽奖已完成请过${t}s后再试`
+            btn.disabled = true
+            t--
+            if(t == 0){
+                clearInterval(choice)
+                btn.disabled = false
+                p.innerHTML = "开始抽奖！"
+            }
+           },1000)
+           
+        }
+        btn.addEventListener("click",getAward)
+    </script>
+</body>
+</html>
